@@ -1,6 +1,5 @@
 # nginx-php5
-
-Includes nginx and php5
+Includes nginx and php5 running with supervisor
 
 ## To build
 
@@ -25,6 +24,9 @@ sudo docker run -d -p 8000:80 --volumes-from APPDATA -v /home/me/myphpapp:/var/w
 
 The startup.sh script will add the environment variables with MYSQL_ to /etc/php5/fpm/pool.d/env.conf so PHP-FPM detects them. If you need to use them you can do:
 <?php getenv("SOME_ENV_VARIABLE_THAT_HAS_MYSQL_IN_THE_NAME"); ?>
+
+### Testing that it works
+Go to http://ip:port/test and you should see the output of phpinfo()
 
 ### Credits
 Credit to: Nian Wang 
