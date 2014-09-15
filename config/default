@@ -32,7 +32,6 @@ server {
 
   location ~ \.php$ {
     client_max_body_size 10m;
-    include fastcgi_params;
 
     fastcgi_connect_timeout 3s;
     fastcgi_pass unix:/var/run/php5-fpm.sock;

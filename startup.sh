@@ -2,12 +2,12 @@
 
 ENV_CONF=/etc/php5/fpm/pool.d/env.conf
 
+echo "Configuring Nginx and PHP5-FPM with environment variables"
+
 # Update php5-fpm with access to Docker environment variables
 echo '[www]' > $ENV_CONF
-for var in $(env | grep MYSQL_ | awk -F= '{print $1}')
+for var in $(env | awk -F= '{print $1}')
 do
-    echo "env[${var}] = ${!var}" >> $ENV_CONF
+	echo "Adding variable {$var}"
+	echo "env[${var}] = ${!var}" >> $ENV_CONF
 done
-
-service php5-fpm start
-nginx -g "daemon off;"
