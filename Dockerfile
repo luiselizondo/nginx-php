@@ -48,6 +48,7 @@ RUN mkdir /var/www
 RUN mkdir /var/www/test
 ADD ./config/index.php /var/www/test/index.php
 
+RUN usermod -u 1000 www-data
 RUN chown -R www-data:www-data /var/www
 
 EXPOSE 80
