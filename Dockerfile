@@ -54,8 +54,6 @@ RUN chown -R www-data:www-data /var/www
 
 EXPOSE 80
 
-VOLUMES ["/var/www/sites/default/files"]
-
 WORKDIR /var/www
 
 CMD ["/usr/bin/supervisord", "-n"]
