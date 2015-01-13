@@ -31,6 +31,7 @@ ADD ./config/nginx.conf /etc/nginx/nginx.conf
 ADD ./config/default /etc/nginx/sites-available/default
 ADD ./config/realip.conf /etc/nginx/conf.d/realip.conf
 ADD ./config/supervisor.conf /etc/supervisor/conf.d/supervisord-nginx.conf
+ADD ./config/php.ini /etc/php5/fpm/php.ini
 
 ## Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -52,6 +53,8 @@ RUN usermod -u 1000 www-data
 RUN chown -R www-data:www-data /var/www
 
 EXPOSE 80
+
+VOLUMES ["/var/www/sites/default/files"]
 
 WORKDIR /var/www
 
