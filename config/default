@@ -4,7 +4,6 @@ server {
 
   root /var/www;
   index index.html index.php;
-  server_name _;
 
   location = /stub_status {
     stub_status on;
