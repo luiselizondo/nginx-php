@@ -1,9 +1,9 @@
 server {
   listen 80 default_server;
-  #listen [::]:80 default_server ipv6only=on;
 
   root /var/www;
   index index.html index.php;
+  server_name _;
 
   location = /stub_status {
     stub_status on;
@@ -30,7 +30,7 @@ server {
   }
 
   location ~ \.php$ {
-    client_max_body_size 10m;
+    client_max_body_size 500m;
 
     fastcgi_connect_timeout 3s;
     fastcgi_pass unix:/var/run/php5-fpm.sock;

@@ -31,13 +31,14 @@ ADD ./config/nginx.conf /etc/nginx/nginx.conf
 ADD ./config/default /etc/nginx/sites-available/default
 ADD ./config/realip.conf /etc/nginx/conf.d/realip.conf
 ADD ./config/supervisor.conf /etc/supervisor/conf.d/supervisord-nginx.conf
-ADD ./config/php.ini /etc/php5/fpm/php.ini
 
 ## Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN sed -i 's/memory_limit = .*/memory_limit = 196M/' /etc/php5/fpm/php.ini
 RUN sed -i 's/cgi.fix_pathinfo = .*/cgi.fix_pathinfo = 0/' /etc/php5/fpm/php.ini
+RUN sed -i 's/upload_max_filesize = .*/upload_max_filesize = 500M/' /etc/php5/fpm/php.ini
+RUN sed -i 's/post_max_size = .*/post_max_size = 500M/' /etc/php5/fpm/php.ini
 
 # Startup script
 # This startup script wll configure nginx
@@ -46,8 +47,7 @@ RUN chmod +x /opt/startup.sh
 
 RUN mkdir /var/www
 
-RUN mkdir /var/www/test
-ADD ./config/index.php /var/www/test/index.php
+ADD ./config/index.php /var/www/index.php
 
 RUN usermod -u 1000 www-data
 RUN chown -R www-data:www-data /var/www
