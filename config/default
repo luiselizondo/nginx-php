@@ -5,6 +5,9 @@ server {
   index index.html index.php;
   server_name _;
 
+  access_log /var/log/supervisor/nginx-access.log;
+  error_log /var/log/supervisor/nginx-error.log;
+
   location = /stub_status {
     stub_status on;
     access_log off;
